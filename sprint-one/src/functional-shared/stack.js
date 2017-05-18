@@ -8,7 +8,6 @@ var Stack = function() {
     someInstance[prop] = stackMethods[prop];
   }
 
-
   return someInstance;
 };
 
@@ -22,9 +21,16 @@ var stackMethods = {
   },
 
   pop: function() {
+    var index = this.size() - 1;
+    var temp = this[index];
+
+    delete this[index];
+
     if (this._size > 0) {
       this._size--;
     }
+
+    return temp;
   },
 
   size: function() {
