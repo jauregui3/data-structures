@@ -13,7 +13,7 @@ var Stack = function() {
 
 var stackMethods = {
   push: function(value) {
-    //this.size() = value; ???
+
     var index = this.size();
     this[index] = value;
 
@@ -37,6 +37,3 @@ var stackMethods = {
     return this._size;
   }
 };
-
-
-var myStack = Stack();
