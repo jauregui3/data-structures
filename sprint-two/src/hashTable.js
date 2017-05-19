@@ -1,29 +1,49 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
-
-  var tuple = function(key, value) {
-    var obj = [];
-    obj.push(key, value);
-    return obj;
-  }
 };
 
+// get will return the storage object
+// get will return the storage object
+
 HashTable.prototype.insert = function(k, v) {
-  // hash function is getIndexBelowMaxForKey
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // insert key at index in storage
-  this._storage.set(index, tuple(k, v));
+  var tuple = new Array(k, v);
+
+  var bucket = this._storage.get(index);
+  if (bucket === undefined) {
+    var newBucket = [];
+    newBucket.push(tuple);
+    this._storage.set(index, newBucket);
+  } else {
+    var updatedKey = false;
+    for (var i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === k) {
+        bucket[i][1] = v;
+        updatedKey = true;
+      }
+    }
+
+    if (!updatedKey) {
+      bucket.push(tuple);
+      this._storage.set(index, newBucket);
+    }
+  }
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  var tupleCollection = this._storage.get(index);
-  for (var i = 0; i < tupleCollection.length; i++) {
-    if (k = tupleCollection[i][0]) {
-      return tupleCollection[i][1];
+  var bucket = this._storage.get(index);
+
+  if (bucket) {
+    for (var i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === k) {
+        return bucket[i][1];
+      }
     }
   }
+
+  return undefined;
 };
 
 HashTable.prototype.remove = function(k) {
@@ -35,9 +55,51 @@ HashTable.prototype.remove = function(k) {
 
 
 
-// [1, , 3, , , 6, 7, 8]
 
-// set > eval to 6
+
+
+
+/*
+var HashTable = function() {
+  this._limit = 8;
+  this._storage = LimitedArray(this._limit);
+};
+
+HashTable.prototype.insert = function(k, v) {
+  // hash function is getIndexBelowMaxForKey
+  var index = getIndexBelowMaxForKey(k, this._limit);
+
+  var bucket = [];
+  var tuple = [];
+  tuple.push(k, v);
+
+  // insert key at index in storage
+  // if index does not have bucket
+
+  // get will return the storage object
+  if (this._storage.storage[index] === undefined) {
+    this._storage.set(index, bucket); // where bucket is an array
+  }
+
+  if (this._storage.storage[index][])
+
+  this._storage.set(index, )     [index].push(tuple);
+  // else push the key/val pair to the bucket
+
+
+
+};
+
+HashTable.prototype.retrieve = function(k) {
+  var index = getIndexBelowMaxForKey(k, this._limit);
+  return this._storage.get(index);
+};
+
+HashTable.prototype.remove = function(k) {
+  var index = getIndexBelowMaxForKey(k, this._limit);
+  this._storage.set(index, undefined);
+};
+*/
 
 /*
  * Complexity: What is the time complexity of the above functions?
