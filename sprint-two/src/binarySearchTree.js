@@ -21,18 +21,34 @@ BinarySearchTree.prototype.insert = function(value) {
 };
 
 BinarySearchTree.prototype.contains = function(value) {
-  if (value === this._value) {
-    return true;
-  } else if (value < this._value) {
-    this.left.contains(value);
-  } else if (value > this._value) {
-    this.right.contains(value);
+  var result = false;
+
+  var searchTree = function (root) {
+    if (value === root._value) {
+      result = true;
+    } else if (value < root._value && root.left !== undefined) {
+      if(root.left.contains(value)) {
+        result = true;
+      }
+    } else if (value > root._value && root.right !== undefined) {
+      if (root.right.contains(value)) {
+        result = true;
+      }
+    }
   }
-  return false;
+
+  searchTree(this);
+
+  return result;
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(cb) {
-
+  cb(this._value);
+  if (this.left !== undefined) {
+    this.left.depthFirstLog(cb);
+  } else if (this.right !== undefined) {
+    this.right.depthFirstLog(cb);
+  }
 };
 
 /*
