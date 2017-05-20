@@ -26,7 +26,6 @@ HashTable.prototype.insert = function(k, v) {
 
     if (!updatedKey) {
       bucket.push(tuple);
-      this._storage.set(index, newBucket);
     }
   }
 };
