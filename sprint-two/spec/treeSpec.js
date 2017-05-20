@@ -16,6 +16,13 @@ describe('tree', function() {
     expect(tree.children[0].value).to.equal(5);
   });
 
+  it('should have methods named "addChild" and "contains", and a property named "value" on children', function() {
+    tree.addChild(1);
+    expect(tree.children[0].addChild).to.be.a('function');
+    expect(tree.children[0].contains).to.be.a('function');
+    expect(tree.children[0].hasOwnProperty('value')).to.equal(true);
+  });
+
   it('should return true for a value that the tree contains', function() {
     tree.addChild(5);
     expect(tree.contains(5)).to.equal(true);
