@@ -36,6 +36,14 @@ describe('linkedList', function() {
     expect(linkedList.removeHead()).to.equal(4);
   });
 
+  it('should set head and tail to null when sole item is removed', function() {
+    linkedList.addToTail(4);
+    linkedList.removeHead(4);
+    expect(linkedList.head).to.equal(null);
+    expect(linkedList.tail).to.equal(null);
+  });
+
+
   it('should contain a value that was added', function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
