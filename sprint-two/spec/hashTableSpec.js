@@ -35,6 +35,13 @@ describe('hashTable', function() {
     expect(hashTable.retrieve('Steven')).to.equal(undefined);
   });
 
+  it('should not change the length of _storage',function() {
+    hashTable.insert('Steven', 'Tyler');
+    expect(hashTable._limit).to.equal(8);
+    hashTable.remove('Steven');
+    expect(hashTable._limit).to.equal(8);
+  });
+
   it('should handle hash function collisions', function() {
     var v1 = 'val1';
     var v2 = 'val2';
