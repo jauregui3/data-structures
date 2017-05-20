@@ -5,7 +5,7 @@ var BinarySearchTree = function(value) {
 };
 
 BinarySearchTree.prototype.insert = function(value) {
-  if (value < this._value) {
+  if (value <= this._value) {
     if (this.left === undefined) {
       this.left = new BinarySearchTree(value);
     } else {
