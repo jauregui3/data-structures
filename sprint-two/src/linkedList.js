@@ -4,7 +4,6 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-    // empty LL case
     if (this.head === null) {
       this.tail = Node(value);
       this.head = this.tail;

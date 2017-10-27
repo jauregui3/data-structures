@@ -3,9 +3,6 @@ var HashTable = function() {
   this._storage = LimitedArray(this._limit);
 };
 
-// get will return the storage object
-// get will return the storage object
-
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var tuple = new Array(k, v);
@@ -46,6 +43,7 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
+  // refactor this --delete tuple instead of bucket
   var index = getIndexBelowMaxForKey(k, this._limit);
   this._storage.set(index, undefined);
 };
